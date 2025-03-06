@@ -47,32 +47,34 @@
     <footer>© 2025 MyLanding - Tutti i diritti riservati</footer>
 
 <script>
- document.getElementById('contactForm').addEventListener('submit', function (e) {
-    e.preventDefault(); // Evita il refresh della pagina
+    document.getElementById('contactForm').addEventListener('submit', async function (e) {
+        e.preventDefault(); // Evita il comportamento predefinito (ricaricare la pagina)
 
-    const formData = {
-        nome: document.querySelector('input[name="nome"]').value,
-        email: document.querySelector('input[name="email"]').value,
-        messaggio: document.querySelector('textarea[name="messaggio"]').value
-    };
+        const formData = new FormData(this);
 
-    fetch('/api/contatto', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById('messageResponse').innerHTML = `<p style="color: green;">${data.message}</p>`;
-        document.getElementById('contactForm').reset(); // Pulisce il form dopo l'invio
-    })
-    .catch(error => {
-        document.getElementById('messageResponse').innerHTML = `<p style="color: red;">Errore nell'invio del messaggio.</p>`;
+        try {
+            const response = await fetch('/api/contatto', {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                document.getElementById('messageResponse').innerHTML = 
+                    `<p style="color: green;">${data.message}</p>`;
+                this.reset(); // Pulisce il form dopo l'invio
+            } else {
+                document.getElementById('messageResponse').innerHTML = 
+                    `<p style="color: red;">Errore: ${data.message}</p>`;
+            }
+        } catch (error) {
+            document.getElementById('messageResponse').innerHTML = 
+                `<p style="color: red;">Errore nell'invio del messaggio.</p>`;
+        }
     });
-});
 </script>
+
 
 </body>
 
