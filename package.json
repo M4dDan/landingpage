@@ -3,13 +3,7 @@
   "version": "1.0.0",
   "description": "Landing page con modulo di contatto",
   "main": "index.html",
-  "scripts": {
-    "dev": "vercel dev",
-  },
-  "dependencies": {
-    "nodemailer": "^6.7.2",
-    "formidable": "^2.0.1"
-  },
+  "dependencies": {},
   "devDependencies": {},
   "engines": {
     "node": "22.x"
