@@ -48,27 +48,24 @@
 
 <script>
     document.getElementById('contactForm').addEventListener('submit', function (e) {
-        e.preventDefault(); // Impedisce il comportamento predefinito
+        e.preventDefault(); // Evita il comportamento predefinito (ricaricare la pagina)
 
+        // Crea un oggetto FormData per inviare i dati del form
         const formData = new FormData(this);
 
-        fetch('/api/contact', {
+        // Invia la richiesta tramite fetch
+        fetch('/api/contatto', {
             method: 'POST',
             body: formData
         })
-        .then(response => response.json())
+        .then(response => response.json()) // Converte la risposta in JSON
         .then(data => {
-            if (data.message) {
-                alert(data.message);
-                // Pulisci il modulo dopo l'invio
-                document.getElementById('contactForm').reset();
-            } else {
-                alert('Errore sconosciuto');
-            }
+            // Mostra il messaggio di successo
+            document.getElementById('messageResponse').innerHTML = `<p style="color: green;">${data.message}</p>`;
         })
         .catch(error => {
-            console.error('Errore:', error);
-            alert('Errore nell\'invio del messaggio');
+            // Mostra il messaggio di errore in caso di problemi
+            document.getElementById('messageResponse').innerHTML = `<p style="color: red;">Errore nell'invio del messaggio.</p>`;
         });
     });
 </script>
