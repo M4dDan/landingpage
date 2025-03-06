@@ -50,30 +50,38 @@
     document.getElementById('contactForm').addEventListener('submit', async function (e) {
         e.preventDefault(); // Evita il comportamento predefinito (ricaricare la pagina)
 
-        const formData = new FormData(this);
+        // Prendi i dati direttamente dai campi del form
+        const nome = document.querySelector('[name="nome"]').value;
+        const email = document.querySelector('[name="email"]').value;
+        const messaggio = document.querySelector('[name="messaggio"]').value;
+
+        // Costruisci il corpo della richiesta in formato JSON
+        const formData = { nome, email, messaggio };
 
         try {
             const response = await fetch('/api/contatto', {
                 method: 'POST',
-                body: formData
+                headers: { 'Content-Type': 'application/json' }, // Dichiara che stiamo inviando JSON
+                body: JSON.stringify(formData) // Converte l'oggetto in stringa JSON
             });
 
             const data = await response.json();
 
             if (response.ok) {
-                document.getElementById('messageResponse').innerHTML = 
+                document.getElementById('messageResponse').innerHTML =
                     `<p style="color: green;">${data.message}</p>`;
                 this.reset(); // Pulisce il form dopo l'invio
             } else {
-                document.getElementById('messageResponse').innerHTML = 
+                document.getElementById('messageResponse').innerHTML =
                     `<p style="color: red;">Errore: ${data.message}</p>`;
             }
         } catch (error) {
-            document.getElementById('messageResponse').innerHTML = 
+            document.getElementById('messageResponse').innerHTML =
                 `<p style="color: red;">Errore nell'invio del messaggio.</p>`;
         }
     });
 </script>
+
 
 
 </body>
