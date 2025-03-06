@@ -34,15 +34,15 @@
         </div>
     </section>
 
-    <section id="contatti">
-        <h2>Contattaci</h2>
-        <form id="contactForm">
-            <input type="text" name="nome" placeholder="Nome" required>
-            <input type="email" name="email" placeholder="Email" required>
-            <textarea name="messaggio" placeholder="Messaggio" required></textarea>
-            <button type="submit">Invia</button>
-        </form>
-    </section>
+<section id="contatti">
+    <h2>Contattaci</h2>
+    <form action="/api/contatto" method="POST">
+        <input type="text" name="nome" placeholder="Nome" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <textarea name="messaggio" placeholder="Messaggio" required></textarea>
+        <button type="submit">Invia</button>
+    </form>
+</section>
 
     <footer>© 2025 MyLanding - Tutti i diritti riservati</footer>
 
