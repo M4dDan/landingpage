@@ -34,59 +34,56 @@
         </div>
     </section>
 
-<section id="contatti">
-    <h2>Contattaci</h2>
-    <form action="/api/contatto" method="POST">
-        <input type="text" name="nome" placeholder="Nome" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <textarea name="messaggio" placeholder="Messaggio" required></textarea>
-        <button type="submit">Invia</button>
-    </form>
-</section>
+    <section id="contatti">
+        <h2>Contattaci</h2>
+        <form id="contactForm" action="/api/contatto" method="POST">
+            <input type="text" name="nome" placeholder="Nome" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <textarea name="messaggio" placeholder="Messaggio" required></textarea>
+            <button type="submit">Invia</button>
+        </form>
+        <div id="messageResponse"></div> <!-- Qui verrà mostrato il messaggio di conferma o errore -->
+    </section>
 
     <footer>© 2025 MyLanding - Tutti i diritti riservati</footer>
 
-<script>
-    document.getElementById('contactForm').addEventListener('submit', async function (e) {
-        e.preventDefault();  // Previene il comportamento di default (no ricarica pagina)
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', async function (e) {
+            e.preventDefault();  // Previene il comportamento di default (no ricarica pagina)
 
-        // Ottieni i dati dal form
-        const nome = document.querySelector('[name="nome"]').value;
-        const email = document.querySelector('[name="email"]').value;
-        const messaggio = document.querySelector('[name="messaggio"]').value;
+            // Ottieni i dati dal form
+            const nome = document.querySelector('[name="nome"]').value;
+            const email = document.querySelector('[name="email"]').value;
+            const messaggio = document.querySelector('[name="messaggio"]').value;
 
-        try {
-            // Invia i dati tramite fetch
-            const response = await fetch('/api/contatto', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ nome, email, messaggio })
-            });
+            try {
+                // Invia i dati tramite fetch
+                const response = await fetch('/api/contatto', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nome, email, messaggio })
+                });
 
-            // Ottieni la risposta
-            const data = await response.json();
+                // Ottieni la risposta
+                const data = await response.json();
 
-            if (response.ok) {
-                // Mostra messaggio di successo senza reindirizzare
+                if (response.ok) {
+                    // Mostra messaggio di successo senza reindirizzare
+                    document.getElementById('messageResponse').innerHTML =
+                        `<p style="color: green;">Messaggio inviato con successo!</p>`;
+                    this.reset(); // Resetta il modulo
+                } else {
+                    // Mostra messaggio di errore senza reindirizzare
+                    document.getElementById('messageResponse').innerHTML =
+                        `<p style="color: red;">Errore: ${data.message}</p>`;
+                }
+            } catch (error) {
+                // Mostra messaggio di errore in caso di problemi
                 document.getElementById('messageResponse').innerHTML =
-                    `<p style="color: green;">Messaggio inviato con successo!</p>`;
-                this.reset(); // Resetta il modulo
-            } else {
-                // Mostra messaggio di errore senza reindirizzare
-                document.getElementById('messageResponse').innerHTML =
-                    `<p style="color: red;">Errore: ${data.message}</p>`;
+                    `<p style="color: red;">Errore di connessione al server.</p>`;
             }
-        } catch (error) {
-            // Mostra messaggio di errore in caso di problemi
-            document.getElementById('messageResponse').innerHTML =
-                `<p style="color: red;">Errore di connessione al server.</p>`;
-        }
-    });
-</script>
-
-
-
-
+        });
+    </script>
 
 </body>
 
