@@ -48,35 +48,42 @@
 
 <script>
     document.getElementById('contactForm').addEventListener('submit', async function (e) {
-        e.preventDefault();
+        e.preventDefault();  // Previene il comportamento di default (no ricarica pagina)
 
+        // Ottieni i dati dal form
         const nome = document.querySelector('[name="nome"]').value;
         const email = document.querySelector('[name="email"]').value;
         const messaggio = document.querySelector('[name="messaggio"]').value;
 
         try {
+            // Invia i dati tramite fetch
             const response = await fetch('/api/contatto', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ nome, email, messaggio })
             });
 
+            // Ottieni la risposta
             const data = await response.json();
 
             if (response.ok) {
+                // Mostra messaggio di successo senza reindirizzare
                 document.getElementById('messageResponse').innerHTML =
                     `<p style="color: green;">Messaggio inviato con successo!</p>`;
-                this.reset();
+                this.reset(); // Resetta il modulo
             } else {
+                // Mostra messaggio di errore senza reindirizzare
                 document.getElementById('messageResponse').innerHTML =
                     `<p style="color: red;">Errore: ${data.message}</p>`;
             }
         } catch (error) {
+            // Mostra messaggio di errore in caso di problemi
             document.getElementById('messageResponse').innerHTML =
                 `<p style="color: red;">Errore di connessione al server.</p>`;
         }
     });
 </script>
+
 
 
 
