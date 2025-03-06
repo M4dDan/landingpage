@@ -1,0 +1,12 @@
+{
+  "name": "mio-progetto",
+  "version": "1.0.0",
+  "description": "Progetto per il modulo di contatto",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "nodemailer": "^6.7.0"
+  }
+}
