@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">MyLanding</div>
+            <ul class="nav-links">
+                <li><a href="#servizi">Servizi</a></li>
+                <li><a href="#contatti">Contatti</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Benvenuto su MyLanding</h1>
+        <p>Scopri i nostri servizi innovativi</p>
+        <a href="#servizi" class="btn">Scopri di più</a>
+    </section>
+
+    <section id="servizi">
+        <h2>I nostri Servizi</h2>
+        <div class="servizi-container">
+            <div class="servizio">💻 Sviluppo Web</div>
+            <div class="servizio">📈 SEO & Marketing</div>
+            <div class="servizio">🛒 E-commerce</div>
+        </div>
+    </section>
+
+    <section id="contatti">
+        <h2>Contattaci</h2>
+        <form id="contactForm">
+            <input type="text" name="nome" placeholder="Nome" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <textarea name="messaggio" placeholder="Messaggio" required></textarea>
+            <button type="submit">Invia</button>
+        </form>
+    </section>
+
+    <footer>© 2025 MyLanding - Tutti i diritti riservati</footer>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Impedisce il comportamento predefinito del form
+
+            const formData = new FormData(this);
+
+            fetch('/api/contatto', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message || 'Errore nell\'invio del messaggio');
+            })
+            .catch(error => {
+                console.error('Errore:', error);
+                alert('Errore nell\'invio del messaggio');
+            });
+        });
+    </script>
+</body>
+
+</html>
