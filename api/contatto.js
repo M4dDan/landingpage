@@ -8,7 +8,7 @@ export default async (req, res) => {
         const transporter = nodemailer.createTransport({
             service: 'gmail', // Puoi usare altri servizi come SendGrid, Mailgun, ecc.
             auth: {
-                user: 'gfam.webmaster@gmail.com' // Sostituisci con il tuo indirizzo email
+                user: 'gfam.webmaster@gmail.com', // Sostituisci con il tuo indirizzo email
                 pass: 'pbul vufs qnyg rgyu'  // Sostituisci con la tua password
             }
         });
