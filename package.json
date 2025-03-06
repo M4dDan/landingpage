@@ -9,7 +9,7 @@
     "start": "vercel start"
   },
   "dependencies": {
-    "nodemailer": "^6.7.2",  // Aggiungi nodemailer qui
+    "nodemailer": "^6.7.2",
     "formidable": "^2.0.1"
   },
   "devDependencies": {},
