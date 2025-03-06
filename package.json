@@ -1,0 +1,21 @@
+{
+  "name": "my-landing-page",
+  "version": "1.0.0",
+  "description": "Landing page con modulo di contatto",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "vercel build",
+    "start": "vercel start"
+  },
+  "dependencies": {
+    "nodemailer": "^6.7.2",  // Aggiungi nodemailer qui
+    "formidable": "^2.0.1"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": "22.x"
+  },
+  "author": "Il tuo nome",
+  "license": "ISC"
+}
