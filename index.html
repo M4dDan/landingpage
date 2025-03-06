@@ -46,26 +46,33 @@
 
     <footer>© 2025 MyLanding - Tutti i diritti riservati</footer>
 
-    <script>
-        document.getElementById('contactForm').addEventListener('submit', function (e) {
-            e.preventDefault(); // Impedisce il comportamento predefinito del form
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
+        e.preventDefault(); // Impedisce il comportamento predefinito
 
-            const formData = new FormData(this);
+        const formData = new FormData(this);
 
-            fetch('/api/contatto', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert(data.message || 'Errore nell\'invio del messaggio');
-            })
-            .catch(error => {
-                console.error('Errore:', error);
-                alert('Errore nell\'invio del messaggio');
-            });
+        fetch('/api/contact', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+                alert(data.message);
+                // Pulisci il modulo dopo l'invio
+                document.getElementById('contactForm').reset();
+            } else {
+                alert('Errore sconosciuto');
+            }
+        })
+        .catch(error => {
+            console.error('Errore:', error);
+            alert('Errore nell\'invio del messaggio');
         });
-    </script>
+    });
+</script>
+
 </body>
 
 </html>
